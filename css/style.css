@@ -1,0 +1,60 @@
+main {
+width: 70vw;
+height: 80vh;
+border: 2px solid black;
+display: grid;
+}
+h1 {
+    
+    display: flex;
+    justify-content: center;
+}
+.scores {
+    
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 70vw;
+    height: 15vh;
+}
+.player {
+    
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+.computer {
+    
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+#play {
+    width: 70vw;
+    height: 60vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+}
+#deal {
+    width: 7vw;
+    height: 2vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#shuffle {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    align-items: ;
+}
+#master-deck {
+    width: 110vh;
+    height: 3vh;
+    display: flex;
+    flex-direction: row-reverse;
+    align-content: center; 
+}
