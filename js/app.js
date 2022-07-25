@@ -131,9 +131,17 @@ function dealACard() {
   if (playerDeal.value > computerDeal.value) {
     playerScore.innerText = initialPlayerScore++;
     computerScore.innerText = initialComputerScore--;
+    playerDeck.unshift(playerDeal);
+    playerDeck.unshift(computerDeal);
+    console.log(playerDeck);
+    console.log(computerDeck);
   } else if (computerDeal.value > playerDeal.value) {
     computerScore.innerText = initialComputerScore++;
     playerScore.innerText = initialPlayerScore--;
+    computerDeck.unshift(computerDeal);
+    computerDeck.unshift(playerDeal);
+    console.log(playerDeck);
+    console.log(computerDeck);
   } else if (playerDeal.value === computerDeal.value) {
     console.log('Its a tie!');
   }
