@@ -19,12 +19,13 @@ const shuffledComputerContainer = document.getElementById('c-container');
 const shuffledContainer = document.getElementById('main-container');
 const dealButton = document.getElementById('deal');
 const shuffleAndPlay = document.getElementById('shuffle');
+const restartButton = document.getElementById('restart');
 let pCard = document.querySelector('.p-card');
 let cCard = document.querySelector('.c-card');
-let playerScore = document.getElementById('p-score');
-let computerScore = document.getElementById('c-score');
+let playerScore = document.getElementById('player-score');
+let computerScore = document.getElementById('computer-score');
 /*----- event listeners -----*/
-shuffleAndPlay.addEventListener('click', renderNewShuffledDeck);
+shuffleAndPlay.addEventListener('click', createNewShuffledDeck);
 shuffleAndPlay.addEventListener('click', separateDecks);
 
 /*----- functions -----*/
@@ -55,11 +56,11 @@ function buildMasterDeck() {
     console.log(deck);
     return deck;
   }
-  renderNewShuffledDeck();
-// In the function above, the masterDeck is built and eachr rank is given numerical values. 
+  createNewShuffledDeck();
+// In the function above, the masterDeck is built and each rank is given numerical values. 
 
 
-function getNewShuffledDeck() {
+function getMasterDeckCopy() {
   // Create a copy of the masterDeck (leave masterDeck untouched!)
   const tempDeck = [...masterDeck];
   const newShuffledDeck = [];
@@ -76,9 +77,9 @@ function getNewShuffledDeck() {
 // Then the tempDeck is shuffled randommly and placed into a new deck called newShuffledDeck. 
 
 
-function renderNewShuffledDeck() {
+function createNewShuffledDeck() {
   // Create a copy of the masterDeck (leave masterDeck untouched!)
-  shuffledDeck = getNewShuffledDeck();
+  shuffledDeck = getMasterDeckCopy();
   console.log(shuffledDeck);
   // renderDeckInContainer(shuffledDeck, shuffledContainer);
 }
@@ -116,41 +117,34 @@ renderDeckInContainer(computerDeck, shuffledComputerContainer);
 // Now, create a function that allows you to pass the image of a random card into the containers placed in the middle of the screen. 
 */ 
 
-function dealCards() {
+let playerDeal;
+let computerDeal;
 
+function dealACard() {
 
-    for (let i = 0; i < playerDeck.length; i++) {
-        cardHtml = `<div class="card ${playerDeck[i].face}"</div>`;
-        console.log(cardHtml);
-    }
-    pCard.innerHTML = cardHtml;
-    for (let i = 0; i < computerDeck.length; i++) {
-        cardHtml = `<div class="card ${computerDeck[i].face}"</div>`;
-    }
-    cCard.innerHTML = cardHtml;
+  playerDeal = playerDeck.pop();
+  computerDeal = computerDeck.pop();
+
+  pCard.innerHTML = `<div class="card ${playerDeal.face}"</div>`;
+  cCard.innerHTML = `<div class="card ${computerDeal.face}"</div>`;
+  
+  if (playerDeal.value > computerDeal.value) {
+    playerScore.innerText = initialPlayerScore++;
+    computerScore.innerText = initialComputerScore--;
+  } else if (computerDeal.value > playerDeal.value) {
+    computerScore.innerText = initialComputerScore++;
+    playerScore.innerText = initialPlayerScore--;
+  } else if (playerDeal.value === computerDeal.value) {
+    console.log('Its a tie!');
+  }
 }
-dealButton.addEventListener('click', dealCards);
+dealButton.addEventListener('click', dealACard);
 
-// For some reason, it doesn't iterate over the array after the first time. 
-
-/*function deal() {
-
-    playerDeck.forEach(function(card) {
-    cardsHtml = `<div class="card ${card.face}"></div>`; // Use this for when there's a tie maybe?
-    })
-    pCard.innerHTML = cardsHtml;
-
-    computerDeck.forEach(function(card) {
-    cardsHtml = `<div class="card ${card.face}"></div>`;
-    })
-    cCard.innerHTML = cardsHtml;
-}
-dealButton.addEventListener('click', deal);
-*/
 
 // Write a function that will change the scores on the DOM. 
 
-function compareCards() {
+
+/*function compareCards() {
 
 
     for (let i = 0; i < playerDeck.length; i++) {
@@ -179,3 +173,35 @@ function compareCards() {
 }
 }
 dealButton.addEventListener('click', compareCards);
+*/
+
+// Create the init function below. 
+
+/* function init() {
+  scores = {
+    initialPlayerScore: 26,
+    initialComputerScore: 26,
+};
+  winner = null;
+  cardHtml = '';
+  
+}
+restartButton.addEventListener('click', init);
+*/ 
+
+// The init() function is a reset button. So, create the init() function such that it resets the
+// game to its original state. Start with the Master Deck.
+
+function init() {
+
+  buildMasterDeck();
+  separateDecks();
+  scores = {
+    initialPlayerScore: 26,
+    initialComputerScore: 26,
+  };
+  cardHtml = '';
+  winner = null;
+}
+restartButton.addEventListener('click', init);
+
