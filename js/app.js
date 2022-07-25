@@ -18,12 +18,15 @@ const shuffledPlayerContainer = document.getElementById('p-container');
 const shuffledComputerContainer = document.getElementById('c-container');
 const shuffledContainer = document.getElementById('main-container');
 const dealButton = document.getElementById('deal');
+//const clearTieButton = document.getElementById('clear-tie');
 const shuffleAndPlay = document.getElementById('shuffle');
 const restartButton = document.getElementById('restart');
 let pCard = document.querySelector('.p-card');
 let cCard = document.querySelector('.c-card');
 let playerScore = document.getElementById('player-score');
 let computerScore = document.getElementById('computer-score');
+let computerTie = document.getElementById('computerTieContainer');
+let playerTie = document.getElementById('playerTieContainer');
 /*----- event listeners -----*/
 shuffleAndPlay.addEventListener('click', createNewShuffledDeck);
 shuffleAndPlay.addEventListener('click', separateDecks);
@@ -119,6 +122,8 @@ renderDeckInContainer(computerDeck, shuffledComputerContainer);
 
 let playerDeal;
 let computerDeal;
+let tiePlayerCards;
+let tieComputerCards;
 
 function dealACard() {
 
@@ -129,24 +134,56 @@ function dealACard() {
   cCard.innerHTML = `<div class="card ${computerDeal.face}"</div>`;
   
   if (playerDeal.value > computerDeal.value) {
+
     playerScore.innerText = initialPlayerScore++;
     computerScore.innerText = initialComputerScore--;
     playerDeck.unshift(playerDeal);
     playerDeck.unshift(computerDeal);
-    console.log(playerDeck);
-    console.log(computerDeck);
+
   } else if (computerDeal.value > playerDeal.value) {
+
     computerScore.innerText = initialComputerScore++;
     playerScore.innerText = initialPlayerScore--;
     computerDeck.unshift(computerDeal);
     computerDeck.unshift(playerDeal);
-    console.log(playerDeck);
-    console.log(computerDeck);
-  } else if (playerDeal.value === computerDeal.value) {
-    console.log('Its a tie!');
+
+   } else if (playerDeal.value === computerDeal.value) {
+     tiePlayerCards = playerDeck.slice(-3);
+     console.log(tiePlayerCards);
+     tieComputerCards = computerDeck.slice(-3);
+     console.log(tieComputerCards);
+    playerTie.innerHTML += `<div class="card ${tiePlayerCards[0].face}"</div>`
+    playerTie.innerHTML +=`<div class="card ${tiePlayerCards[1].face}"</div>` 
+    playerTie.innerHTML += `<div class="card ${tiePlayerCards[2].face}"</div>`
+    computerTie.innerHTML += `<div class="card ${tieComputerCards[0].face}"</div>` 
+    computerTie.innerHTML += `<div class="card ${tieComputerCards[1].face}"</div>` 
+    computerTie.innerHTML += `<div class="card ${tieComputerCards[2].face}"</div>`;
+
+    if (tiePlayerCards[2].value > tieComputerCards[2].value) {
+      playerDeck.unshift(tiePlayerCards[0]);
+      playerDeck.unshift(tiePlayerCards[1]);
+      playerDeck.unshift(tiePlayerCards[2]);
+      playerDeck.unshift(tieComputerCards[0]);
+      playerDeck.unshift(tieComputerCards[1]);
+      playerDeck.unshift(tieComputerCards[2]);
+      console.log(playerDeck);
+      playerScore.innerText = initialPlayerScore + 4;
+      computerScore.innerText = initialComputerScore - 4;
+    } else {
+      computerDeck.unshift(tieComputerCards[0]);
+      computerDeck.unshift(tieComputerCards[1]);
+      computerDeck.unshift(tieComputerCards[2]);
+      computerDeck.unshift(tiePlayerCards[0]);
+      computerDeck.unshift(tiePlayerCards[1]);
+      computerDeck.unshift(tiePlayerCards[2]);
+      console.log(computerDeck);
+      computerScore.innerText = initialComputerScore + 4;
+      playerScore.innerText = initialPlayerScore - 4;
+    }
   }
 }
 dealButton.addEventListener('click', dealACard);
+
 
 
 // Write a function that will change the scores on the DOM. 
