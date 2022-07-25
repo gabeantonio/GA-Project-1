@@ -1,57 +1,56 @@
 <!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
     <link href="css/card-deck-css/css/cardstarter.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
-    <title>Document</title>
-</head>
-
-<body>
+    <script defer src="js/app.js"></script>
+  </head>
+  <body>
     
     <h1>War</h1>
 
-    <h2 id="master-deck">Master Deck</h2>
+    <div id="main-container">Hello!</div>
+
+    <div id="p-container">Hello Gabe</div>
+
+    <div id="c-container"></div>
+
 
     <main>
      <nav class="scores">
         <div class="player">
             <h3>Player Score</h3>
-            <h4>Number</h4>
+            <h4 id="player-score">26</h4>
         </div> 
         
         <div class="computer">
             <h3>Computer Score</h3>
-            <h4>Number</h4>
+            <h4 id="computer-score">26</h4>
         </div>
     </nav>
     
-
-    <section id="master-deck-container" class="card-container">
+    <section class="c-card-container">
+    <div class="c-card">
+        
+    </div>
     </section>
 
-    <div id="play">
-    <button id="deal">Deal Card</button>
-    </div>
-
-
-    <section id="shuffle" class="card-container">
+    <section class="p-card-container">
+    <div class ="p-card">
+       
+    </div>   
     </section>
 
     </main>
 
-    <div class="start"></div>
+    <button id="deal">Deal Card</button>
+   
     <button id="shuffle">Shuffle and Play</button>
-    </div>
-
-    <div class="play-again">
+    
     <button id="restart">Restart Game</button>
-    </div>
+    
 
-</body>
-
+  </body>
 </html>

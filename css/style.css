@@ -1,8 +1,9 @@
 main {
-width: 70vw;
-height: 80vh;
-border: 2px solid black;
-display: grid;
+    width: 70vw;
+    height: 80vh;
+    border: 2px solid black;
+    display: grid;
+    justify-content: center;
 }
 h1 {
     
@@ -29,27 +30,11 @@ h1 {
     flex-direction: column;
     margin: 10px;
 }
-#play {
-    width: 70vw;
-    height: 60vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-end;
-}
-#deal {
-    width: 7vw;
-    height: 2vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
 #shuffle {
+    
     display: flex;
     flex-direction: row;
     justify-content: center;
-
-    align-items: ;
 }
 #master-deck {
     width: 110vh;
@@ -57,4 +42,37 @@ h1 {
     display: flex;
     flex-direction: row-reverse;
     align-content: center; 
+}
+.c-card-container {
+    margin: 0 250px 0 250px;
+    display: flex;
+    justify-content: center;
+}
+.c-card > img {
+    max-width: 150px;
+    height: auto;
+}
+.p-card-container {
+    margin: 50px 250px 0 250px;
+    display: flex;
+    justify-content: center;
+}
+.p-card > img {
+    max-width: 150px;;
+    height: auto;
+}
+#p-container {
+    background-color: aqua;
+    height: 10vh;
+    width: 10vw;
+}
+#c-container {
+    background-color: fuchsia;
+    height: 10vh;
+    width: 10vw;
+}
+#main-container {
+    background-color: steelblue;
+    height: 10vh;
+    width: 10vw;
 }
