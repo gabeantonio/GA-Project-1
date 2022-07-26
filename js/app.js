@@ -127,15 +127,14 @@ let tieComputerCards;
 
 function dealACard() {
 
-  console.log(initialPlayerScore,  '<---- Player Score');
-  console.log(initialComputerScore, '<---- Computer Score');
+  resetTie();
 
   playerDeal = playerDeck.pop();
   computerDeal = computerDeck.pop();
 
   pCard.innerHTML = `<div class="card ${playerDeal.face}"</div>`;
   cCard.innerHTML = `<div class="card ${computerDeal.face}"</div>`;
-  
+
   compareValues();
 }
 dealButton.addEventListener('click', dealACard);
@@ -157,8 +156,15 @@ function compareValues() {
 } else {
   tie();
 }
+console.log(initialPlayerScore,  '<---- Player Score');
+  console.log(initialComputerScore, '<---- Computer Score');
+render();
 }
 
+function render() {
+computerScore.innerText = initialComputerScore;
+playerScore.innerText = initialPlayerScore;
+}
 
 function tie() {
   if (playerDeal.value === computerDeal.value) {
@@ -180,10 +186,12 @@ function tie() {
      playerDeck.unshift(tieComputerCards[0]);
      playerDeck.unshift(tieComputerCards[1]);
      playerDeck.unshift(tieComputerCards[2]);
+     initialPlayerScore = initialPlayerScore + 4;
+     initialComputerScore = initialComputerScore -4;
+     playerScore.innerText = initialPlayerScore;
+     computerScore.innerText = initialComputerScore;
      console.log(initialPlayerScore);
      console.log(initialComputerScore);
-     playerScore.innerText = initialPlayerScore + 4;
-     computerScore.innerText = initialComputerScore - 4;
    } else if (tieComputerCards[2].value > tiePlayerCards[2].value) {
      computerDeck.unshift(tieComputerCards[0]);
      computerDeck.unshift(tieComputerCards[1]);
@@ -191,14 +199,28 @@ function tie() {
      computerDeck.unshift(tiePlayerCards[0]);
      computerDeck.unshift(tiePlayerCards[1]);
      computerDeck.unshift(tiePlayerCards[2]);
+     initialComputerScore = initialPlayerScore + 4;
+     initialPlayerScore = initialComputerScore - 4;
+     computerScore.innerText = initialComputerScore;
+     playerScore.innerText = initialPlayerScore;
      console.log(initialPlayerScore);
      console.log(initialComputerScore);
-     computerScore.innerText = initialComputerScore + 4;
-     playerScore.innerText = initialPlayerScore - 4;
+
 }
 }
+render(); 
 }
 
+function resetTie() {
+  playerTie.innerHTML = '';
+  computerTie.innerHTML = '';
+}
+
+function gameOver() {
+  if (initialPlayerScore === 52) {
+    
+  }
+}
 
 // Write a function that will change the scores on the DOM. 
 
