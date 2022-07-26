@@ -2,6 +2,7 @@ body {
     background-image: url(https://media.istockphoto.com/vectors/wooden-boards-background-vector-id1283739446?k=20&m=1283739446&s=612x612&w=0&h=6a7pFqUfXCehZFwrwXUOnE1xHMbc8kgRgYuLPNqmotA=); 
     font-family:'Wallpoet', cursive;
     font-size: 30px;
+    color: white;
 }
 main {
     background-image: url(https://img.freepik.com/premium-vector/poker-table-background-green-color_47243-1068.jpg); 
@@ -12,6 +13,7 @@ main {
     display: grid;
     justify-content: center;
     font-size: 20px;
+    margin: 0 0 0 55px;
 }
 h1 {
     
@@ -19,7 +21,7 @@ h1 {
     justify-content: center;
 }
 .scores {
-    
+    font-size: 30px;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
@@ -27,17 +29,12 @@ h1 {
     height: 15vh;
 }
 .player {
-    
     display: flex;
     flex-direction: column;
-    margin: 10px;
-    align-items: flex-end;
 }
 .computer {
-    
     display: flex;
     flex-direction: column;
-    margin: 10px;
 }
 #shuffle {
     
@@ -73,22 +70,22 @@ h1 {
     height: auto;
 }
 #computerTieContainer {
-
-    height: 16vh;
-    width: 30vw;
-
-}
-#playerTieContainer {
-    
     height: 16vh;
     width: 30vw;
     display: flex;
+    justify-content: flex-start;
+}
+#playerTieContainer {
+    height: 16vh;
+    width: 30vw;
+    display: flex;
+    justify-content: flex-end;
     
 }
 #tie-containers {
     display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
+    justify-content: space-between;
+    align-items: center;
 }
 .material-symbols-outlined {
   font-variation-settings:
@@ -96,4 +93,18 @@ h1 {
   'wght' 400,
   'GRAD' 0,
   'opsz' 48,
+}
+#deal {
+    margin: 0 0 0 662px;
+}
+#player-score {
+color: #BA1313;
+font-size: 30px;
+display: flex;
+justify-content: flex-end;
+}
+#computer-score {
+color: #BA1313;
+font-size: 30px;
+
 }

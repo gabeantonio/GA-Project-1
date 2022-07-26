@@ -13,6 +13,7 @@ let playerDeck;
 let computerDeck;
 let initialPlayerScore = 26;
 let initialComputerScore = 26;
+
 /*----- cached element references -----*/
 const shuffledPlayerContainer = document.getElementById('p-container');
 const shuffledComputerContainer = document.getElementById('c-container');
