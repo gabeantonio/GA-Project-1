@@ -1,12 +1,12 @@
 body {
-    background-image: url(https://media.istockphoto.com/vectors/wooden-boards-background-vector-id1283739446?k=20&m=1283739446&s=612x612&w=0&h=6a7pFqUfXCehZFwrwXUOnE1xHMbc8kgRgYuLPNqmotA=);
+    background-image: url(https://media.istockphoto.com/vectors/wooden-boards-background-vector-id1283739446?k=20&m=1283739446&s=612x612&w=0&h=6a7pFqUfXCehZFwrwXUOnE1xHMbc8kgRgYuLPNqmotA=); 
     font-family:'Wallpoet', cursive;
     font-size: 30px;
 }
 main {
-    background-image: url(https://img.freepik.com/premium-vector/poker-table-background-green-color_47243-1068.jpg);
+    background-image: url(https://img.freepik.com/premium-vector/poker-table-background-green-color_47243-1068.jpg); 
     background-size: 100%;
-    width: 70vw;
+    width: 90vw;
     height: 80vh;
     border: 2px solid black;
     display: grid;
@@ -75,13 +75,13 @@ h1 {
 #computerTieContainer {
 
     height: 16vh;
-    width: 23vw;
+    width: 30vw;
 
 }
 #playerTieContainer {
     
     height: 16vh;
-    width: 23vw;
+    width: 30vw;
     display: flex;
     
 }

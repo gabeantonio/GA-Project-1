@@ -114,9 +114,7 @@ separateDecks();
 }
 renderDeckInContainer(playerDeck, shuffledPlayerContainer);
 renderDeckInContainer(computerDeck, shuffledComputerContainer);
-
 // The cards now show on the screen and they're randomized every time.  Congrats!
-
 // Now, create a function that allows you to pass the image of a random card into the containers placed in the middle of the screen. 
 */ 
 
@@ -124,6 +122,8 @@ let playerDeal;
 let computerDeal;
 let tiePlayerCards;
 let tieComputerCards;
+let secondPlayerTieCards;
+let secondComputerTieCards;
 
 function dealACard() {
 
@@ -146,6 +146,8 @@ function compareValues() {
     computerScore.innerText = initialComputerScore--;
     playerDeck.unshift(playerDeal);
     playerDeck.unshift(computerDeal);
+    console.log(playerDeck);
+    console.log(computerDeck);
 
   } else if (computerDeal.value > playerDeal.value) {
  
@@ -153,6 +155,8 @@ function compareValues() {
     playerScore.innerText = initialPlayerScore--;
     computerDeck.unshift(computerDeal);
     computerDeck.unshift(playerDeal);
+    console.log(playerDeck);
+    console.log(computerDeck);
 } else {
   tie();
 }
@@ -168,46 +172,67 @@ playerScore.innerText = initialPlayerScore;
 
 function tie() {
   if (playerDeal.value === computerDeal.value) {
-    tiePlayerCards = playerDeck.slice(-3);
+    tiePlayerCards = playerDeck.slice(-4);
+    playerDeck.pop();
+    playerDeck.pop();
+    playerDeck.pop();
+    playerDeck.pop();
     console.log(tiePlayerCards);
-    tieComputerCards = computerDeck.slice(-3);
+    console.log(playerDeck);
+    tieComputerCards = computerDeck.slice(-4);
+    computerDeck.pop();
+    computerDeck.pop();
+    computerDeck.pop();
+    computerDeck.pop();
     console.log(tieComputerCards);
+    console.log(computerDeck);
    playerTie.innerHTML += `<div class="card ${tiePlayerCards[0].face}"</div>`
-   playerTie.innerHTML +=`<div class="card ${tiePlayerCards[1].face}"</div>` 
+   playerTie.innerHTML += `<div class="card ${tiePlayerCards[1].face}"</div>` 
    playerTie.innerHTML += `<div class="card ${tiePlayerCards[2].face}"</div>`
+   playerTie.innerHTML += `<div class="card ${tiePlayerCards[3].face}"</div>`
    computerTie.innerHTML += `<div class="card ${tieComputerCards[0].face}"</div>` 
    computerTie.innerHTML += `<div class="card ${tieComputerCards[1].face}"</div>` 
-   computerTie.innerHTML += `<div class="card ${tieComputerCards[2].face}"</div>`;
+   computerTie.innerHTML += `<div class="card ${tieComputerCards[2].face}"</div>`
+   computerTie.innerHTML += `<div class="card ${tieComputerCards[3].face}"</div>`;
 
-   if (tiePlayerCards[2].value > tieComputerCards[2].value) {
+   if (tiePlayerCards[3].value > tieComputerCards[3].value) {
+     playerDeck.unshift(playerDeal);
+     playerDeck.unshift(computerDeal);
      playerDeck.unshift(tiePlayerCards[0]);
      playerDeck.unshift(tiePlayerCards[1]);
      playerDeck.unshift(tiePlayerCards[2]);
+     playerDeck.unshift(tiePlayerCards[3]);
      playerDeck.unshift(tieComputerCards[0]);
      playerDeck.unshift(tieComputerCards[1]);
      playerDeck.unshift(tieComputerCards[2]);
-     initialPlayerScore = initialPlayerScore + 4;
-     initialComputerScore = initialComputerScore -4;
+     playerDeck.unshift(tieComputerCards[3]);
+     initialPlayerScore = initialPlayerScore + 5;
+     initialComputerScore = initialComputerScore - 5;
      playerScore.innerText = initialPlayerScore;
      computerScore.innerText = initialComputerScore;
-     console.log(initialPlayerScore);
-     console.log(initialComputerScore);
-   } else if (tieComputerCards[2].value > tiePlayerCards[2].value) {
+     console.log(playerDeck);
+     console.log(computerDeck);
+   } else if (tieComputerCards[3].value > tiePlayerCards[3].value) {
+     computerDeck.unshift(playerDeal);
+     computerDeck.unshift(computerDeal);
      computerDeck.unshift(tieComputerCards[0]);
      computerDeck.unshift(tieComputerCards[1]);
      computerDeck.unshift(tieComputerCards[2]);
+     computerDeck.unshift(tieComputerCards[3]);
      computerDeck.unshift(tiePlayerCards[0]);
      computerDeck.unshift(tiePlayerCards[1]);
      computerDeck.unshift(tiePlayerCards[2]);
-     initialComputerScore = initialPlayerScore + 4;
-     initialPlayerScore = initialComputerScore - 4;
+     computerDeck.unshift(tiePlayerCards[3]);
+     initialComputerScore = initialComputerScore + 5;
+     initialPlayerScore = initialPlayerScore - 5;
      computerScore.innerText = initialComputerScore;
      playerScore.innerText = initialPlayerScore;
-     console.log(initialPlayerScore);
-     console.log(initialComputerScore);
+     console.log(playerDeck);
+     console.log(computerDeck);
+   } 
 
-}
-}
+   }
+
 render(); 
 }
 
@@ -222,41 +247,6 @@ function gameOver() {
   }
 }
 
-// Write a function that will change the scores on the DOM. 
-
-
-/*function compareCards() {
-
-
-    for (let i = 0; i < playerDeck.length; i++) {
-
-    if (playerDeck[i].value > computerDeck[i].value) {
-        playerScore.innerText = initialPlayerScore++;
-        computerScore.innerText = computerScore--;
-    } else if (computerDeck[i].value > playerDeck[i].value) {
-        computerScore.innerText = initialComputerScore++;
-        playerScore.innerText =  playerScore--;
-    } else if (computerDeck[i].value === playerDeck[i].value) {
-        console.log('Its a tie!');
-    }
-    }
-    for (let i = 0; i < computerDeck.length; i++) {
-
-        if (playerDeck[i].value > computerDeck[i].value) {
-            playerScore.innerText = initialPlayerScore++;
-            computerScore.innerText = computerScore--;
-        } else if (computerDeck[i].value > playerDeck[i].value) {
-            computerScore.innerText = initialComputerScore++;
-            playerScore.innerText =  playerScore--;
-        } else if (computerDeck[i].value === playerDeck[i].value) {
-            console.log('Its a tie!');
-        }
-}
-}
-dealButton.addEventListener('click', compareCards);
-*/
-
-// Create the init function below. 
 
 /* function init() {
   scores = {
@@ -284,5 +274,3 @@ function init() {
   cardHtml = '';
   winner = null;
 }
-restartButton.addEventListener('click', init);
-
