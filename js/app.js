@@ -257,11 +257,29 @@ function gameOver() {
 // Write the winning logic.
 
 function winGame() {
-  if (playerDeck.length >= 48 && playerDeal.value === computerDeal.value) {
+  if (playerDeck.length === 48 && computerDeck.length === 4 && playerDeal.value === computerDeal.value) {
     computerTie.innerHTML = '';
     winner.innerHTML = "You win! The computer doesn't have enough cards for war!";
-  } else if (computerDeck.length >= 48 && playerDeal.value === computerDeal.value) {
-    playerTie.innerHTML = ''
+  } else if (playerDeck.length === 49 && computerDeck.length === 3 && playerDeal.value === computerDeal.value) {
+    computerTie.innerHTML = '';
+    winner.innerHTML = "You win! The computer doesn't have enough cards for war!";
+  } else if (playerDeck.length === 50 && computerDeck.length === 2 && playerDeal.value === computerDeal.value) {
+    computerTie.innerHTML = '';
+    winner.innerHTML = "You win! The computer doesn't have enough cards for war!";
+  } else if (playerDeck.length === 51 && computerDeck.length === 1 && playerDeal.value === computerDeal.value) {
+    computerTie.innerHTML = '';
+    winner.innerHTML = "You win! The computer doesn't have enough cards for war!";
+  } else if (computerDeck.length === 48 && playerDeck.length === 4 && playerDeal.value === computerDeal.value) {
+    playerTie.innerHTML = '';
+    winner.innerHTML = "The computer wins! You don't have enough cards for war!";
+  } else if (computerDeck.length === 49 && playerDeck.length === 3 && playerDeal.value === computerDeal.value) {
+    playerTie.innerHTML = '';
+    winner.innerHTML = "The computer wins! You don't have enough cards for war!";
+  } else if (computerDeck.length === 50 && playerDeck.length === 2 && playerDeal.value === computerDeal.value) {
+    playerTie.innerHTML = '';
+    winner.innerHTML = "The computer wins! You don't have enough cards for war!";
+  } else if (computerDeck.length === 51 && playerDeck.length === 1 && playerDeal.value === computerDeal.value) {
+    playerTie.innerHTML = '';
     winner.innerHTML = "The computer wins! You don't have enough cards for war!";
   } else if (playerDeck.length === 52) {
     winner.innerHTML = 'You win!';
