@@ -28,6 +28,7 @@ let playerScore = document.getElementById('player-score');
 let computerScore = document.getElementById('computer-score');
 let computerTie = document.getElementById('computerTieContainer');
 let playerTie = document.getElementById('playerTieContainer');
+let winner = document.getElementById('winner');
 /*----- event listeners -----*/
 shuffleAndPlay.addEventListener('click', createNewShuffledDeck);
 shuffleAndPlay.addEventListener('click', separateDecks);
@@ -162,7 +163,8 @@ function compareValues() {
   tie();
 }
 console.log(initialPlayerScore,  '<---- Player Score');
-  console.log(initialComputerScore, '<---- Computer Score');
+console.log(initialComputerScore, '<---- Computer Score');
+winGame();
 render();
 }
 
@@ -213,6 +215,7 @@ function tie() {
      computerScore.innerText = initialComputerScore;
      console.log(playerDeck);
      console.log(computerDeck);
+     console.log(tiePlayerCards);
    } else if (tieComputerCards[3].value > tiePlayerCards[3].value) {
      computerDeck.unshift(playerDeal);
      computerDeck.unshift(computerDeal);
@@ -230,7 +233,10 @@ function tie() {
      playerScore.innerText = initialPlayerScore;
      console.log(playerDeck);
      console.log(computerDeck);
-   } 
+     console.log(tieComputerCards);
+   } else if (tieComputerCards[3] === tiePlayerCards[3]) {
+    
+   }
 
    }
 
@@ -248,30 +254,37 @@ function gameOver() {
   }
 }
 
+// Write the winning logic.
 
-/* function init() {
-  scores = {
-    initialPlayerScore: 26,
-    initialComputerScore: 26,
-};
-  winner = null;
-  cardHtml = '';
-  
+function winGame() {
+  if (playerDeck.length >= 48 && playerDeal.value === computerDeal.value) {
+    winner.innerHTML = 'You win!';
+  } else if (computerDeck.length >= 48 && playerDeal.value === computerDeal.value) {
+    winner.innerHTML = 'The computer wins!';
+  } else if (playerDeck.length === 52) {
+    winner.innerHTML = 'You win!';
+  } else if (computerDeck.length === 52) {
+    winner.innerHTML = 'The computer wins!';
+  }
 }
-restartButton.addEventListener('click', init);
-*/ 
 
 // The init() function is a reset button. So, create the init() function such that it resets the
 // game to its original state. Start with the Master Deck.
 
 function init() {
 
-  buildMasterDeck();
-  separateDecks();
-  scores = {
-    initialPlayerScore: 26,
-    initialComputerScore: 26,
-  };
-  cardHtml = '';
-  winner = null;
+initialComputerScore = 26;
+initialPlayerScore = 26;
+computerScore.innerText = initialComputerScore;
+playerScore.innerText = initialPlayerScore;
+cCard.innerHTML = '';
+pCard.innerHTML = '';
+computerTie.innerHTML = '';
+playerTie.innerHTML = '';
+createNewShuffledDeck();
+separateDecks();
+cardHtml = '';
+winner.innerHTML = '';
+
 }
+restartButton.addEventListener('click', init);
