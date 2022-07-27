@@ -20,7 +20,6 @@ const shuffledComputerContainer = document.getElementById('c-container');
 const shuffledContainer = document.getElementById('main-container');
 const dealButton = document.getElementById('deal');
 //const clearTieButton = document.getElementById('clear-tie');
-const shuffleAndPlay = document.getElementById('shuffle');
 const restartButton = document.getElementById('restart');
 let pCard = document.querySelector('.p-card');
 let cCard = document.querySelector('.c-card');
@@ -30,8 +29,6 @@ let computerTie = document.getElementById('computerTieContainer');
 let playerTie = document.getElementById('playerTieContainer');
 let winner = document.getElementById('winner');
 /*----- event listeners -----*/
-shuffleAndPlay.addEventListener('click', createNewShuffledDeck);
-shuffleAndPlay.addEventListener('click', separateDecks);
 
 /*----- functions -----*/
 
@@ -58,7 +55,6 @@ function buildMasterDeck() {
         });
       });
     });
-    console.log(deck);
     return deck;
   }
   createNewShuffledDeck();
@@ -159,9 +155,8 @@ function compareValues() {
     computerDeck.unshift(playerDeal);
     console.log(playerDeck);
     console.log(computerDeck);
-} else {
+} 
   tie();
-}
 console.log(initialPlayerScore,  '<---- Player Score');
 console.log(initialComputerScore, '<---- Computer Score');
 winGame();
@@ -180,14 +175,12 @@ function tie() {
     playerDeck.pop();
     playerDeck.pop();
     playerDeck.pop();
-    console.log(tiePlayerCards);
     console.log(playerDeck);
     tieComputerCards = computerDeck.slice(-4);
     computerDeck.pop();
     computerDeck.pop();
     computerDeck.pop();
     computerDeck.pop();
-    console.log(tieComputerCards);
     console.log(computerDeck);
    playerTie.innerHTML += `<div class="card ${tiePlayerCards[0].face}"</div>`
    playerTie.innerHTML += `<div class="card ${tiePlayerCards[1].face}"</div>` 
@@ -215,7 +208,6 @@ function tie() {
      computerScore.innerText = initialComputerScore;
      console.log(playerDeck);
      console.log(computerDeck);
-     console.log(tiePlayerCards);
    } else if (tieComputerCards[3].value > tiePlayerCards[3].value) {
      computerDeck.unshift(playerDeal);
      computerDeck.unshift(computerDeal);
@@ -233,13 +225,21 @@ function tie() {
      playerScore.innerText = initialPlayerScore;
      console.log(playerDeck);
      console.log(computerDeck);
-     console.log(tieComputerCards);
-   } else if (tieComputerCards[3] === tiePlayerCards[3]) {
-    
+   } else {
+    playerDeck.unshift(playerDeal);
+    playerDeck.unshift(tiePlayerCards[0]);
+    playerDeck.unshift(tiePlayerCards[1]);
+    playerDeck.unshift(tiePlayerCards[2]);
+    playerDeck.unshift(tiePlayerCards[3]);
+    computerDeck.unshift(computerDeal);
+    computerDeck.unshift(tieComputerCards[0]);
+    computerDeck.unshift(tieComputerCards[1]);
+    computerDeck.unshift(tieComputerCards[2]);
+    computerDeck.unshift(tieComputerCards[3]);
+    console.log(playerDeck);
+    console.log(computerDeck);
    }
-
    }
-
 render(); 
 }
 
@@ -258,9 +258,11 @@ function gameOver() {
 
 function winGame() {
   if (playerDeck.length >= 48 && playerDeal.value === computerDeal.value) {
-    winner.innerHTML = 'You win!';
+    computerTie.innerHTML = '';
+    winner.innerHTML = "You win! The computer doesn't have enough cards for war!";
   } else if (computerDeck.length >= 48 && playerDeal.value === computerDeal.value) {
-    winner.innerHTML = 'The computer wins!';
+    playerTie.innerHTML = ''
+    winner.innerHTML = "The computer wins! You don't have enough cards for war!";
   } else if (playerDeck.length === 52) {
     winner.innerHTML = 'You win!';
   } else if (computerDeck.length === 52) {
@@ -283,6 +285,9 @@ computerTie.innerHTML = '';
 playerTie.innerHTML = '';
 createNewShuffledDeck();
 separateDecks();
+console.log(shuffledDeck);
+console.log(playerDeck);
+console.log(computerDeck);
 cardHtml = '';
 winner.innerHTML = '';
 
