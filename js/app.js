@@ -1,3 +1,4 @@
+console.log('JavaScript is working!');
 
 /*----- constants -----*/
 const suits = ['s', 'c', 'd', 'h'];
@@ -6,7 +7,8 @@ const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', '
 // Build a 'master' deck of 'card' objects used to create shuffled decks.
 const masterDeck = buildMasterDeck();
 
-/*----- app's state (variables) -----*/
+/*----- app's state (variables) -----*/ // There's more past this section of code. 
+
 let shuffledDeck;
 let cardHtml = '';
 let playerDeck;
@@ -15,11 +17,11 @@ let initialPlayerScore = 26;
 let initialComputerScore = 26;
 
 /*----- cached element references -----*/
+
 const shuffledPlayerContainer = document.getElementById('p-container');
 const shuffledComputerContainer = document.getElementById('c-container');
 const shuffledContainer = document.getElementById('main-container');
 const dealButton = document.getElementById('deal');
-//const clearTieButton = document.getElementById('clear-tie');
 const restartButton = document.getElementById('restart');
 let pCard = document.querySelector('.p-card');
 let cCard = document.querySelector('.c-card');
@@ -28,7 +30,10 @@ let computerScore = document.getElementById('computer-score');
 let computerTie = document.getElementById('computerTieContainer');
 let playerTie = document.getElementById('playerTieContainer');
 let winner = document.getElementById('winner');
+
 /*----- event listeners -----*/
+
+// All event listeners can be found under the functions that they call. See below. 
 
 /*----- functions -----*/
 
@@ -48,9 +53,9 @@ function buildMasterDeck() {
               letterRank = 11;
           }
         deck.push({
-          // The 'face' property maps to the library's CSS classes for cards
+          // The 'face' property maps to the library's CSS classes for cards.
           face: `${suit}${rank}`,
-          // Setting the 'value' property for game of blackjack, not war
+          // Setting the 'value' property.
           value: Number(rank) || Number(letterRank)                                                                     
         });
       });
@@ -58,6 +63,7 @@ function buildMasterDeck() {
     return deck;
   }
   createNewShuffledDeck();
+
 // In the function above, the masterDeck is built and each rank is given numerical values. 
 
 
@@ -74,6 +80,7 @@ function getMasterDeckCopy() {
   }
   return newShuffledDeck;
 }
+
 // In the function above, a tempDeck is made as a COPY of the masterDeck to ensure that the masterDeck isn't changed. 
 // Then the tempDeck is shuffled randommly and placed into a new deck called newShuffledDeck. 
 
@@ -86,8 +93,9 @@ function createNewShuffledDeck() {
 }
 
 // In the function above, the newShuffledDeck created from the function is set equal to shuffledDeck.
-// Now, create a function that separates shuffledDeck into 2: one for the player and one for the computer.
 
+
+// Now, create a function that separates shuffledDeck into 2: one for the player and one for the computer.
 
 function separateDecks() {
     playerDeck = shuffledDeck.slice(0, 26);
@@ -97,24 +105,7 @@ function separateDecks() {
 }
 separateDecks();
 
-/* function renderDeckInContainer(deck, container) {
-  container.innerHTML = '';
-  // Let's build the cards as a string of HTML
-  let cardsHtml = '';
-  deck.forEach(function(card) {
-    cardsHtml += `<div class="card ${card.face}"></div>`;
-  });
-  // Or, use reduce to 'reduce' the array into a single thing - in this case a string of HTML markup 
-  // const cardsHtml = deck.reduce(function(html, card) {
-  //   return html + `<div class="card ${card.face}"></div>`;
-  // }, '');
-  container.innerHTML = cardsHtml;
-}
-renderDeckInContainer(playerDeck, shuffledPlayerContainer);
-renderDeckInContainer(computerDeck, shuffledComputerContainer);
-// The cards now show on the screen and they're randomized every time.  Congrats!
-// Now, create a function that allows you to pass the image of a random card into the containers placed in the middle of the screen. 
-*/ 
+// Below are the other state variables mentioned earlier. 
 
 let playerDeal;
 let computerDeal;
@@ -122,6 +113,9 @@ let tiePlayerCards;
 let tieComputerCards;
 let secondPlayerTieCards;
 let secondComputerTieCards;
+
+// Write a function below that pulls from the computerDeck and playerDeck arrays and 
+// displays it on the UI. 
 
 function dealACard() {
 
@@ -136,6 +130,8 @@ function dealACard() {
   compareValues();
 }
 dealButton.addEventListener('click', dealACard);
+
+// Write a function below that compares the two cards that each player puts down. 
 
 function compareValues() {
   if (playerDeal.value > computerDeal.value) {
@@ -161,12 +157,17 @@ console.log(initialPlayerScore,  '<---- Player Score');
 console.log(initialComputerScore, '<---- Computer Score');
 winGame();
 render();
+
 }
+
+// Write a function below that will update the scores on the UI as the game plays out. 
 
 function render() {
 computerScore.innerText = initialComputerScore;
 playerScore.innerText = initialPlayerScore;
 }
+
+// Write a function below that will account for a tie. 
 
 function tie() {
   if (playerDeal.value === computerDeal.value) {
@@ -182,16 +183,13 @@ function tie() {
     computerDeck.pop();
     computerDeck.pop();
     console.log(computerDeck);
-   playerTie.innerHTML += `<div class="card ${tiePlayerCards[0].face}"</div>`
-   playerTie.innerHTML += `<div class="card ${tiePlayerCards[1].face}"</div>` 
-   playerTie.innerHTML += `<div class="card ${tiePlayerCards[2].face}"</div>`
-   playerTie.innerHTML += `<div class="card ${tiePlayerCards[3].face}"</div>`
-   computerTie.innerHTML += `<div class="card ${tieComputerCards[0].face}"</div>` 
-   computerTie.innerHTML += `<div class="card ${tieComputerCards[1].face}"</div>` 
-   computerTie.innerHTML += `<div class="card ${tieComputerCards[2].face}"</div>`
-   computerTie.innerHTML += `<div class="card ${tieComputerCards[3].face}"</div>`;
-
-   if (tiePlayerCards[3].value > tieComputerCards[3].value) {
+    for (let i = 0; i < 4; i++) {
+      if (tiePlayerCards[i] && tieComputerCards[i]) {
+        playerTie.innerHTML += `<div class="card ${tiePlayerCards[i].face}"</div>`
+        computerTie.innerHTML += `<div class="card ${tieComputerCards[i].face}"</div>`
+      }
+    };
+    if (tiePlayerCards[3].value > tieComputerCards[3].value) {
      playerDeck.unshift(playerDeal);
      playerDeck.unshift(computerDeal);
      playerDeck.unshift(tiePlayerCards[0]);
@@ -243,49 +241,28 @@ function tie() {
 render(); 
 }
 
+// Write a function below that removes the tie cards from the UI. 
+
 function resetTie() {
   playerTie.innerHTML = '';
   computerTie.innerHTML = '';
 }
 
-function gameOver() {
-  if (initialPlayerScore === 52) {
-    
-  }
-}
-
-// Write the winning logic.
+// Write a function below for the winning logic.
 
 function winGame() {
-  if (playerDeck.length === 48 && computerDeck.length === 4 && playerDeal.value === computerDeal.value) {
+  if (initialPlayerScore >= 48 && initialComputerScore <= 4 && playerDeal.value === computerDeal.value) {
     computerTie.innerHTML = '';
     winner.innerHTML = "You win! The computer doesn't have enough cards for war!";
-  } else if (playerDeck.length === 49 && computerDeck.length === 3 && playerDeal.value === computerDeal.value) {
-    computerTie.innerHTML = '';
-    winner.innerHTML = "You win! The computer doesn't have enough cards for war!";
-  } else if (playerDeck.length === 50 && computerDeck.length === 2 && playerDeal.value === computerDeal.value) {
-    computerTie.innerHTML = '';
-    winner.innerHTML = "You win! The computer doesn't have enough cards for war!";
-  } else if (playerDeck.length === 51 && computerDeck.length === 1 && playerDeal.value === computerDeal.value) {
-    computerTie.innerHTML = '';
-    winner.innerHTML = "You win! The computer doesn't have enough cards for war!";
-  } else if (computerDeck.length === 48 && playerDeck.length === 4 && playerDeal.value === computerDeal.value) {
+    console.log("You win! The computer doesn't have enough cards for war!");
+} if (initialComputerScore >= 48 && initialPlayerScore <= 4 && playerDeal.value === computerDeal.value) {     
     playerTie.innerHTML = '';
     winner.innerHTML = "The computer wins! You don't have enough cards for war!";
-  } else if (computerDeck.length === 49 && playerDeck.length === 3 && playerDeal.value === computerDeal.value) {
-    playerTie.innerHTML = '';
-    winner.innerHTML = "The computer wins! You don't have enough cards for war!";
-  } else if (computerDeck.length === 50 && playerDeck.length === 2 && playerDeal.value === computerDeal.value) {
-    playerTie.innerHTML = '';
-    winner.innerHTML = "The computer wins! You don't have enough cards for war!";
-  } else if (computerDeck.length === 51 && playerDeck.length === 1 && playerDeal.value === computerDeal.value) {
-    playerTie.innerHTML = '';
-    winner.innerHTML = "The computer wins! You don't have enough cards for war!";
-  } else if (playerDeck.length === 52) {
+} if (playerDeck.length === 52) {
     winner.innerHTML = 'You win!';
-  } else if (computerDeck.length === 52) {
+} if (computerDeck.length === 52) {
     winner.innerHTML = 'The computer wins!';
-  }
+}
 }
 
 // The init() function is a reset button. So, create the init() function such that it resets the
