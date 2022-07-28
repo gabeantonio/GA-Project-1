@@ -251,11 +251,11 @@ function resetTie() {
 // Write a function below for the winning logic.
 
 function winGame() {
-  if (initialPlayerScore >= 48 && initialComputerScore <= 4 && playerDeal.value === computerDeal.value) {
+  if (initialPlayerScore >= 48 || initialComputerScore <= 4 && playerDeal.value === computerDeal.value) {
     computerTie.innerHTML = '';
     winner.innerHTML = "You win! The computer doesn't have enough cards for war!";
     console.log("You win! The computer doesn't have enough cards for war!");
-} if (initialComputerScore >= 48 && initialPlayerScore <= 4 && playerDeal.value === computerDeal.value) {     
+} if (initialComputerScore >= 48 || initialPlayerScore <= 4 && playerDeal.value === computerDeal.value) {     
     playerTie.innerHTML = '';
     winner.innerHTML = "The computer wins! You don't have enough cards for war!";
 } if (playerDeck.length === 52) {
