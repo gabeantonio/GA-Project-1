@@ -67,6 +67,7 @@ To play a new game with a newly shuffled deck, press the "Restart Game" button. 
 3. JavaScript
 4. MDN for JavaScript
 5. Whimsical (Wireframing)
+6. Google Fonts
 
 
 ## Ready? 
