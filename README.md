@@ -1,5 +1,9 @@
 # Project One: War!
 
+## Game Overview
+
+### What is War and how do you play?
+
 War is a card game based on random outcomes. 
 
 A deck of 52 cards, with 4 suits of each number (2-A), is **shuffled randomly** at the start of the game. The deck is then split in half between **two** players. Neither player may look at their cards, and must keep their respective decks face down. At each deal, both players will take the card on top of their decks and flip it face-up in front of one another. The card out of the two with the higher value wins, and the player that put the higher card down keeps **both of the cards** that were put down in that deal. Then, the winning player puts the two cards they just won face down back into the bottom of their deck. 
@@ -12,6 +16,8 @@ If both players deal cards with the same value, then you have what's called a Wa
 
 In this version of the game, if the fourth card of each player dealt during the War is also the same value as the other (another tie), then each player takes the 5 cards that they dealt in the current round and places it back into the bottom of their respective decks. Neither player wins any new cards or points. Then, continue the game as normal to proceed. 
 
+### How do you win?
+
 There are **two (2)** ways to win War: 
 
 1. One of the two players obtains all 52 cards in their deck, leaving the other player with 0 cards. 
@@ -19,7 +25,7 @@ There are **two (2)** ways to win War:
 
 For the second scenario, if one of the players has **48 or more** cards (meaning the other has **4 or less** cards) and a War (tie) is initiated, the player with less cards would not have enough to put down another **4 cards** to settle the War. In this case, the opposite player who **does** have enough cards automatically wins.   
 
- 
+ ### Things to Note:
 
  When the board first loads, you should find it empty, with no cards dealt and no scores displayed. On the bottom of the page, you will find a "Deal Card" button and a "Restart Game" button. 
 
@@ -53,3 +59,39 @@ In the image above, the computer won because it was able to obtain all 52 cards 
 In the image above, the computer won because the other player did not have enough cards to put down to settle the War (a tie between a  7 of Hearts and 7 of Spades). 
 
 To play a new game with a newly shuffled deck, press the "Restart Game" button. This will also reset each player's deck to 26 cards each. 
+
+## Technologies and Resources Used
+
+1. HTML
+2. CSS (Flexbox + Grid)
+3. JavaScript
+4. MDN for JavaScript
+5. Whimsical (Wireframing)
+
+
+## Ready? 
+
+Click the link, if you dare!
+
+This is [War!](https://gabeantonio.github.io/GA-Project-1)
+
+
+## Next Steps
+
+With time, I would like to add:
+
+1. Animated card movements.
+2. An animated "War!" icon when a War occurs during the game. 
+3. Music in the background. 
+
+
+## Special Thanks
+
+Special thanks to:
+
+- Charles Co
+- John McCants 
+- Vieng Nhotsombath
+- Justin Rajewski
+
+for feedback and encouragement throughout the process of creating this game. 
