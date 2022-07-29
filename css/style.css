@@ -24,7 +24,6 @@ h1 {
     margin: 0px;
 }
 .scores {
-
     font-size: 40px;
     display: flex;
     flex-direction: row-reverse;
@@ -38,7 +37,6 @@ h1 {
     flex-direction: column;
 }
 .computer {
-    
     display: flex;
     flex-direction: column;
 }
