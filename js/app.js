@@ -121,12 +121,14 @@ function dealACard() {
 
   resetTie();
 
+  if (playerDeck.length > 0 && computerDeck.length > 0) {
+
   playerDeal = playerDeck.pop();
   computerDeal = computerDeck.pop();
 
   pCard.innerHTML = `<div class="card ${playerDeal.face}"</div>`;
   cCard.innerHTML = `<div class="card ${computerDeal.face}"</div>`;
-
+  }
   compareValues();
 }
 dealButton.addEventListener('click', dealACard);
@@ -152,7 +154,9 @@ function compareValues() {
     console.log(playerDeck);
     console.log(computerDeck);
 } 
+if (winGame() === false) {
   tie();
+} 
 console.log(initialPlayerScore,  '<---- Player Score');
 console.log(initialComputerScore, '<---- Computer Score');
 winGame();
@@ -189,6 +193,7 @@ function tie() {
         computerTie.innerHTML += `<div class="card ${tieComputerCards[i].face}"</div>`
       }
     };
+    console.log(tiePlayerCards[3].value, tieComputerCards[3].value)
     if (tiePlayerCards[3].value > tieComputerCards[3].value) {
      playerDeck.unshift(playerDeal);
      playerDeck.unshift(computerDeal);
@@ -251,19 +256,26 @@ function resetTie() {
 // Write a function below for the winning logic.
 
 function winGame() {
-  if (initialPlayerScore >= 48 || initialComputerScore <= 4 && playerDeal.value === computerDeal.value) {
+  if (initialComputerScore <= 4 && playerDeal.value === computerDeal.value) {
     computerTie.innerHTML = '';
+    playerTie.innerHTML = '';
     winner.innerHTML = "You win! The computer doesn't have enough cards for war!";
     console.log("You win! The computer doesn't have enough cards for war!");
-} if (initialComputerScore >= 48 || initialPlayerScore <= 4 && playerDeal.value === computerDeal.value) {     
+    return true;
+} if (initialPlayerScore <= 4 && playerDeal.value === computerDeal.value) {     
     playerTie.innerHTML = '';
+    computerTie.innerHTML = '';
     winner.innerHTML = "The computer wins! You don't have enough cards for war!";
+    console.log("The computer wins! You don't have enough cards for war!");
+    return true;
 } if (playerDeck.length === 52) {
     winner.innerHTML = 'You win!';
 } if (computerDeck.length === 52) {
     winner.innerHTML = 'The computer wins!';
+} 
+  return false;
 }
-}
+
 
 // The init() function is a reset button. So, create the init() function such that it resets the
 // game to its original state. Start with the Master Deck.
@@ -276,6 +288,8 @@ computerScore.innerText = initialComputerScore;
 playerScore.innerText = initialPlayerScore;
 cCard.innerHTML = '';
 pCard.innerHTML = '';
+tiePlayerCards = [];
+tieComputerCards = [];
 computerTie.innerHTML = '';
 playerTie.innerHTML = '';
 createNewShuffledDeck();
