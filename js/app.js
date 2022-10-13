@@ -9,6 +9,12 @@ let playerDeck;
 let computerDeck;
 let initialPlayerScore = 26;
 let initialComputerScore = 26;
+let playerDeal;
+let computerDeal;
+let tiePlayerCards;
+let tieComputerCards;
+let secondPlayerTieCards;
+let secondComputerTieCards;
 
 const shuffledPlayerContainer = document.getElementById('p-container');
 const shuffledComputerContainer = document.getElementById('c-container');
@@ -25,7 +31,6 @@ let winner = document.getElementById('winner');
 
 function buildMasterDeck() {
     const deck = [];
-    // Use nested forEach to generate card objects
     suits.forEach(function(suit) {
       ranks.forEach(function(rank) {
           let letterRank;
@@ -50,11 +55,9 @@ function buildMasterDeck() {
 
 
 function getMasterDeckCopy() {
-
   const tempDeck = [...masterDeck];
   const newShuffledDeck = [];
   while (tempDeck.length) {
-    
     const rndIdx = Math.floor(Math.random() * tempDeck.length);
     let rndCard = tempDeck.splice(rndIdx, 1)[0];
     newShuffledDeck.push(rndCard);
@@ -62,11 +65,9 @@ function getMasterDeckCopy() {
   return newShuffledDeck;
 }
 
-
 function createNewShuffledDeck() {
   shuffledDeck = getMasterDeckCopy();
 }
-
 
 function separateDecks() {
     playerDeck = shuffledDeck.slice(0, 26);
@@ -74,159 +75,98 @@ function separateDecks() {
 }
 separateDecks();
 
-let playerDeal;
-let computerDeal;
-let tiePlayerCards;
-let tieComputerCards;
-let secondPlayerTieCards;
-let secondComputerTieCards;
-
 function dealACard() {
-
   resetTie();
-
   if (playerDeck.length > 0 && computerDeck.length > 0) {
+    playerDeal = playerDeck.pop();
+    computerDeal = computerDeck.pop();
 
-  playerDeal = playerDeck.pop();
-  computerDeal = computerDeck.pop();
-
-  pCard.innerHTML = `<div class="card ${playerDeal.face}"</div>`;
-  cCard.innerHTML = `<div class="card ${computerDeal.face}"</div>`;
+    pCard.innerHTML = `<div class="card ${playerDeal.face}"</div>`;
+    cCard.innerHTML = `<div class="card ${computerDeal.face}"</div>`;
   }
   compareValues();
 }
 dealButton.addEventListener('click', dealACard);
 
-
 function compareValues() {
   if (playerDeal.value > computerDeal.value) {
-    
     playerScore.innerText = initialPlayerScore++;
     computerScore.innerText = initialComputerScore--;
     playerDeck.unshift(playerDeal);
     playerDeck.unshift(computerDeal);
-    console.log(playerDeck);
-    console.log(computerDeck);
-
   } else if (computerDeal.value > playerDeal.value) {
- 
     computerScore.innerText = initialComputerScore++;
     playerScore.innerText = initialPlayerScore--;
     computerDeck.unshift(computerDeal);
     computerDeck.unshift(playerDeal);
-    console.log(playerDeck);
-    console.log(computerDeck);
-} 
-if (winGame() === false) {
-  tie();
-} 
-console.log(initialPlayerScore,  '<---- Player Score');
-console.log(initialComputerScore, '<---- Computer Score');
-winGame();
-render();
-
+  } 
+  if (winGame() === false) {
+    tie();
+  }  
+  winGame();
+  render();
 }
-
 
 function render() {
 computerScore.innerText = initialComputerScore;
 playerScore.innerText = initialPlayerScore;
 }
 
-
-
 function tie() {
   if (playerDeal.value === computerDeal.value) {
-    tiePlayerCards = playerDeck.slice(-4);
-    playerDeck.pop();
-    playerDeck.pop();
-    playerDeck.pop();
-    playerDeck.pop();
-    console.log(playerDeck);
-    tieComputerCards = computerDeck.slice(-4);
-    computerDeck.pop();
-    computerDeck.pop();
-    computerDeck.pop();
-    computerDeck.pop();
-    console.log(computerDeck);
+      tiePlayerCards = playerDeck.slice(-4);
+      playerDeck.splice(-4);
+      tieComputerCards = computerDeck.slice(-4);
+      computerDeck.splice(-4);
     for (let i = 0; i < 4; i++) {
       if (tiePlayerCards[i] && tieComputerCards[i]) {
         playerTie.innerHTML += `<div class="card ${tiePlayerCards[i].face}"</div>`
         computerTie.innerHTML += `<div class="card ${tieComputerCards[i].face}"</div>`
       }
-    };
-    console.log(tiePlayerCards[3].value, tieComputerCards[3].value)
-    if (tiePlayerCards[3].value > tieComputerCards[3].value) {
-     playerDeck.unshift(playerDeal);
-     playerDeck.unshift(computerDeal);
-     playerDeck.unshift(tiePlayerCards[0]);
-     playerDeck.unshift(tiePlayerCards[1]);
-     playerDeck.unshift(tiePlayerCards[2]);
-     playerDeck.unshift(tiePlayerCards[3]);
-     playerDeck.unshift(tieComputerCards[0]);
-     playerDeck.unshift(tieComputerCards[1]);
-     playerDeck.unshift(tieComputerCards[2]);
-     playerDeck.unshift(tieComputerCards[3]);
-     initialPlayerScore = initialPlayerScore + 5;
-     initialComputerScore = initialComputerScore - 5;
-     playerScore.innerText = initialPlayerScore;
-     computerScore.innerText = initialComputerScore;
-     console.log(playerDeck);
-     console.log(computerDeck);
-   } else if (tieComputerCards[3].value > tiePlayerCards[3].value) {
-     computerDeck.unshift(playerDeal);
-     computerDeck.unshift(computerDeal);
-     computerDeck.unshift(tieComputerCards[0]);
-     computerDeck.unshift(tieComputerCards[1]);
-     computerDeck.unshift(tieComputerCards[2]);
-     computerDeck.unshift(tieComputerCards[3]);
-     computerDeck.unshift(tiePlayerCards[0]);
-     computerDeck.unshift(tiePlayerCards[1]);
-     computerDeck.unshift(tiePlayerCards[2]);
-     computerDeck.unshift(tiePlayerCards[3]);
-     initialComputerScore = initialComputerScore + 5;
-     initialPlayerScore = initialPlayerScore - 5;
-     computerScore.innerText = initialComputerScore;
-     playerScore.innerText = initialPlayerScore;
-     console.log(playerDeck);
-     console.log(computerDeck);
-   } else {
-    playerDeck.unshift(playerDeal);
-    playerDeck.unshift(tiePlayerCards[0]);
-    playerDeck.unshift(tiePlayerCards[1]);
-    playerDeck.unshift(tiePlayerCards[2]);
-    playerDeck.unshift(tiePlayerCards[3]);
-    computerDeck.unshift(computerDeal);
-    computerDeck.unshift(tieComputerCards[0]);
-    computerDeck.unshift(tieComputerCards[1]);
-    computerDeck.unshift(tieComputerCards[2]);
-    computerDeck.unshift(tieComputerCards[3]);
-    console.log(playerDeck);
-    console.log(computerDeck);
-   }
-   }
+};
+  if (tiePlayerCards[3].value > tieComputerCards[3].value) {
+      playerDeck.unshift(playerDeal);
+      playerDeck.unshift(computerDeal);
+      playerDeck.unshift.apply(playerDeck, tiePlayerCards);
+      playerDeck.unshift.apply(playerDeck, tieComputerCards);
+      initialPlayerScore = initialPlayerScore + 5;
+      initialComputerScore = initialComputerScore - 5;
+      playerScore.innerText = initialPlayerScore;
+      computerScore.innerText = initialComputerScore;
+  } else if (tieComputerCards[3].value > tiePlayerCards[3].value) {
+      computerDeck.unshift(playerDeal);
+      computerDeck.unshift(computerDeal);
+      computerDeck.unshift.apply(computerDeck, tieComputerCards);
+      computerDeck.unshift.apply(computerDeck, tiePlayerCards);
+      initialComputerScore = initialComputerScore + 5;
+      initialPlayerScore = initialPlayerScore - 5;
+      computerScore.innerText = initialComputerScore;
+      playerScore.innerText = initialPlayerScore;
+  } else {
+      playerDeck.unshift(playerDeal);
+      playerDeck.unshift.apply(playerDeck, tiePlayerCards);
+      computerDeck.unshift(computerDeal);
+      computerDeck.unshift.apply(computerDeck, tieComputerCards);
+  }
+}
 render(); 
 }
-
 
 function resetTie() {
   playerTie.innerHTML = '';
   computerTie.innerHTML = '';
 }
 
-
 function winGame() {
   if (initialComputerScore <= 4 && playerDeal.value === computerDeal.value) {
     computerTie.innerHTML = '';
     playerTie.innerHTML = '';
     winner.innerHTML = "You win! The computer doesn't have enough cards for war!";
-    console.log("You win! The computer doesn't have enough cards for war!");
     return true;
 } if (initialPlayerScore <= 4 && playerDeal.value === computerDeal.value) {     
     playerTie.innerHTML = '';
     computerTie.innerHTML = '';
     winner.innerHTML = "The computer wins! You don't have enough cards for war!";
-    console.log("The computer wins! You don't have enough cards for war!");
     return true;
 } if (playerDeck.length === 52) {
     winner.innerHTML = 'You win!';
@@ -236,26 +176,20 @@ function winGame() {
   return false;
 }
 
-
 function init() {
-
-initialComputerScore = 26;
-initialPlayerScore = 26;
-computerScore.innerText = initialComputerScore;
-playerScore.innerText = initialPlayerScore;
-cCard.innerHTML = '';
-pCard.innerHTML = '';
-tiePlayerCards = [];
-tieComputerCards = [];
-computerTie.innerHTML = '';
-playerTie.innerHTML = '';
-createNewShuffledDeck();
-separateDecks();
-console.log(shuffledDeck);
-console.log(playerDeck);
-console.log(computerDeck);
-cardHtml = '';
-winner.innerHTML = '';
-
+  initialComputerScore = 26;
+  initialPlayerScore = 26;
+  computerScore.innerText = initialComputerScore;
+  playerScore.innerText = initialPlayerScore;
+  cCard.innerHTML = '';
+  pCard.innerHTML = '';
+  tiePlayerCards = [];
+  tieComputerCards = [];
+  computerTie.innerHTML = '';
+  playerTie.innerHTML = '';
+  cardHtml = '';
+  winner.innerHTML = '';
+  createNewShuffledDeck();
+  separateDecks();
 }
 restartButton.addEventListener('click', init);
