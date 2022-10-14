@@ -74,7 +74,7 @@ To play a new game with a newly shuffled deck, press the "Restart Game" button. 
 
 Click the link, if you dare!
 
-This is [War!](https://gabeantonio.github.io/GA-Project-1)
+This is [War!](https://gabeantonio.github.io/War/)
 
 
 ## Next Steps
