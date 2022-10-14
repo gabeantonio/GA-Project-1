@@ -1,47 +1,29 @@
 body {
     background-image: url(https://media.istockphoto.com/vectors/wooden-boards-background-vector-id1283739446?k=20&m=1283739446&s=612x612&w=0&h=6a7pFqUfXCehZFwrwXUOnE1xHMbc8kgRgYuLPNqmotA=); 
-    font-family:'Rubik Puddles', cursive;
-    font-size: 45px;
+    font-family: 'Rubik Mono One', sans-serif;
+    font-size: 40px;
     color: white;
-    width: clamp(1450px, 50%, 1600px)
-}
-main {
-    background-image: url(https://img.freepik.com/premium-vector/poker-table-background-green-color_47243-1068.jpg); 
-    background-size: 100%;
-    width: 90vw;
-    height: 80vh;
-    border: 2px solid black;
-    border-radius: 25px;
-    display: grid;
-    justify-content: center;
-    font-size: 20px;
-    margin: 0 0 0 50px;
-    width: clamp(1300px, 50%, 1600px)
 }
 h1 {
     display: flex;
     justify-content: center;
     margin: 0px;
+    margin-top: 2%;
+    font-size: 50px;
 }
 .scores {
-    font-size: 40px;
+    font-size: 30px;
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    width: 70vw;
-    height: 15vh;
+    justify-content: space-evenly;
+    margin-top: 2%;
 }
 .player {
-    
     display: flex;
-    flex-direction: column;
 }
 .computer {
     display: flex;
-    flex-direction: column;
 }
 #shuffle {
-    
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -53,77 +35,63 @@ h1 {
     flex-direction: row-reverse;
     align-content: center; 
 }
-.c-card-container {
-    margin: 0 250px 0 250px;
+.card-container {
     display: flex;
+    flex-direction: row-reverse;
     justify-content: center;
-    height: 100px;
+}
+.c-card {
+    margin-left: 15.5%;
+}
+.p-card {
+    margin-right: 15.5%;
 }
 .c-card > img {
-    max-width: 150px;
+    max-width: 30px;
     height: auto;
 }
-.p-card-container {
-    margin: 0px 250px 0 250px;
-    display: flex;
-    justify-content: center;
-    height: 100px;
-}
 .p-card > img {
-    max-width: 150px;;
+    max-width: 30px;
     height: auto;
 }
 #computerTieContainer {
-    height: 16vh;
-    width: 30vw;
-    display: flex;
-    justify-content: flex-start;
+    display: flex;;
+    width: 45%;
 }
 #playerTieContainer {
-    height: 16vh;
-    width: 30vw;
     display: flex;
     justify-content: flex-end;
-    
+    width: 45%;
 }
 #tie-containers {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 48,
+.deal-btn {
+    display: flex;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
-#deal {
-    margin: 0 0 0 630px;
-    font-family: 'Rubik Puddles', cursive;
-    font-size: 25px;
-    color: #00662D;
-    border-radius: 25px;
-}
-#restart {
-    margin: 0 0 0 645px;
-    font-family: 'Rubik Puddles', cursive;
-    border-radius: 25px;
+.restart-btn {
+    display: flex;
+    justify-content: center; 
+    margin-bottom: 2%;
 }
 #player-score {
 color: #BA1313;
-font-family: 'Moo Lah Lah';
-font-size: 50px;
+font-size: 35px;
 display: flex;
-justify-content: flex-end;
+justify-content: center;
 }
 #computer-score {
 color: #BA1313;
-font-family: 'Moo Lah Lah';
-font-size: 50px;
+font-size: 35px;
+display: flex;
+justify-content: center;
 }
 #winning-message {
-    font-size: 30px;
-    height: 5vh;
+    font-size: 25px;
     text-align: center;
+    margin-bottom: 2%
 }

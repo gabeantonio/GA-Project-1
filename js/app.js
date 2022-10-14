@@ -102,7 +102,7 @@ function compareValues() {
   } 
   if (winGame() === false) {
     tie();
-  }  
+  }
   winGame();
   render();
 }
